@@ -1,12 +1,22 @@
-
-<!-- <div *ngFor="let options of circketArr">
-  <button class='btn btn-primary' (click)="cricket"  >{{options}}</button>
-</div> -->
-<select *ngFor="let options of circketArr" [(ngModel)]="selectedText" (click)="cricket()">
-  <option value={{options}} >{{options}}</option>
+<!--
+  <div *ngFor="let options of circketArr">
+    <button class='btn btn-primary' (click)="cricket"  >{{options}}</button>
+  </div>
+-->
+<!--
+  <select
+    *ngFor="let options of circketArr"
+    [(ngModel)]="selectedText"
+    (click)="cricket()"
+  >
+    <option value="{{options}}">{{ options }}</option>
   </select>
 
-
-<ul *ngFor="let score of cricketData">
-<li>{{score.title}}</li>
-</ul>
+  <ul *ngFor="let score of cricketData">
+    <li>{{ score.title }}</li>
+  </ul>
+-->
+<p>I am in home</p>
+<a routerLink="/signup">signup</a>
+<!-- <app-signup></app-signup> -->
+<!-- <app-login></app-login> -->
