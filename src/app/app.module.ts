@@ -18,6 +18,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { routes } from "./app-routing.module";
 import { FootballService } from "./site/services/football.service";
 import { AuthGuardService } from "./site/services/auth-guard.service";
+import { PlayerStatsComponent } from './site/components/players-info/player-stats/player-stats.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +28,8 @@ import { AuthGuardService } from "./site/services/auth-guard.service";
     TrophiesInfoComponent,
     MatchesInfoComponent,
     SignupComponent,
-    LoginComponent
+    LoginComponent,
+    PlayerStatsComponent
   ],
   imports: [
     BrowserModule,

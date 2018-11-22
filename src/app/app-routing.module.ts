@@ -4,6 +4,7 @@ import { LoginComponent } from "./site/authentication/login/login.component";
 import { SignupComponent } from "./site/authentication/signup/signup.component";
 import { LivescoreInfoComponent } from "./site/components/livescore-info/livescore-info.component";
 import { AuthGuardService } from "./site/services/auth-guard.service";
+import { PlayersInfoComponent } from "./site/components/players-info/players-info.component";
 
 export const routes: Routes = [
   {
@@ -27,5 +28,9 @@ export const routes: Routes = [
     path: "livescore_football",
     canActivate: [AuthGuardService],
     component: LivescoreInfoComponent
+  },
+  {
+    path:'player-info',
+    component:PlayersInfoComponent
   }
 ];
