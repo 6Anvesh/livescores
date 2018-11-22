@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
     if (log === "false") {
       // this._router.navigate(["/login"]);
     } else {
-      this._router.navigate(["/livescore_football"]);
+      this._router.navigate(["/livescore-info"]);
     }
   }
 
@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
       res => {
         localStorage.setItem("userid", res._id);
         localStorage.setItem("token", res.token);
-        this._router.navigate(["/livescore_football"]);
+        this._router.navigate(["/livescore-info"]);
         // redirect to some page
         window.alert("Logged in successfully!");
       },

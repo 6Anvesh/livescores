@@ -13,8 +13,9 @@ export class SignupComponent implements OnInit {
   ngOnInit() {
     const log = localStorage.getItem("token");
     if (log === "false") {
+      
     } else {
-      this._router.navigate(["/livescore_football"]);
+      this._router.navigate(["/livescore-info"]);
     }
   }
 

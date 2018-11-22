@@ -5,6 +5,8 @@ import { SignupComponent } from "./site/authentication/signup/signup.component";
 import { LivescoreInfoComponent } from "./site/components/livescore-info/livescore-info.component";
 import { AuthGuardService } from "./site/services/auth-guard.service";
 import { PlayersInfoComponent } from "./site/components/players-info/players-info.component";
+import { MatchesInfoComponent } from "./site/components/matches-info/matches-info.component";
+import { TrophiesInfoComponent } from "./site/components/trophies-info/trophies-info.component";
 
 export const routes: Routes = [
   {
@@ -25,12 +27,20 @@ export const routes: Routes = [
     component: SignupComponent
   },
   {
-    path: "livescore_football",
-    canActivate: [AuthGuardService],
+    path: "livescore-info",
+    // canActivate: [AuthGuardService],
     component: LivescoreInfoComponent
   },
   {
-    path:'player-info',
-    component:PlayersInfoComponent
+    path: "player-info",
+    component: PlayersInfoComponent
+  },
+  {
+    path: "matches-info",
+    component: MatchesInfoComponent
+  },
+  {
+    path: "trophies-info",
+    component: TrophiesInfoComponent
   }
 ];

@@ -19,6 +19,7 @@ import { routes } from "./app-routing.module";
 import { FootballService } from "./site/services/football.service";
 import { AuthGuardService } from "./site/services/auth-guard.service";
 import { PlayerStatsComponent } from './site/components/players-info/player-stats/player-stats.component';
+import { BasketballService } from "./site/services/basketball.service";
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +40,7 @@ import { PlayerStatsComponent } from './site/components/players-info/player-stat
     ReactiveFormsModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [CricketService, AuthService, FootballService, AuthGuardService],
+  providers: [CricketService,BasketballService , AuthService, FootballService, AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
