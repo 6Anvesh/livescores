@@ -27,7 +27,7 @@
     </div>
   </div>
 </a>
-
+</div>
 <!-- <span class="right floated" *ngIf='statsInfo'>
     <app-player-stats [playerStats]='playerDetails'></app-player-stats>
     </span>
@@ -121,7 +121,7 @@
 
 </div>
 
-<div class="ui very padded container segment" style=" margin-top: 5%;" *ngIf="selectField=='football'">
+<div class="ui very padded container segment" style=" margin-top: 5%;" *ngIf="searchFootball?.length&&selectField=='football'">
   <h1>search results</h1>
     <a class="ui card" href="javascript:void(0)" *ngFor="let obj of searchFootball" >
       <div class="content">
