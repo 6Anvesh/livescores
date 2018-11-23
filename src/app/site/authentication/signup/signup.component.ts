@@ -11,12 +11,12 @@ export class SignupComponent implements OnInit {
   constructor(private _auth: AuthService, private _router: Router) {}
 
   ngOnInit() {
-    const log = localStorage.getItem("token");
-    if (log === "false") {
+    // const log = localStorage.getItem("token");
+    // if (log === "false") {
       
-    } else {
-      this._router.navigate(["/livescore-info"]);
-    }
+    // } else {
+    //   this._router.navigate(["/circket"]);
+    // }
   }
 
   registerUser() {

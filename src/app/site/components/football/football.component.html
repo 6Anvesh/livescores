@@ -1,0 +1,277 @@
+<div class="ui grid">
+  <div class="ui blue inverted fixed menu navbar page grid">
+      <a class="item" (click)="homeClicked()">
+      <i class="home icon"></i>
+    </a>
+    <a class="item" (click)="cricketClicked()">Cricket </a>
+    <a class="item" (click)="footballClicked()">Football </a>
+    <a class="item" (click)="basketballClicked()">Basketball </a>
+    <div class="ui dropdown">
+      <!-- <input type="hidden" name="gender"> -->
+      <i class="dropdown icon"></i>
+      <div class="default text">Football services</div>
+      <div class="menu">
+        <div class="item" data-value="livescore" (click)="footballLiveScore('livescore')">Live Score</div>
+        <div class="item" data-value="Trophies" (click)="footballTrophies('Trophies')">Trophies</div>
+        <div class="item" data-value="matches" (click)="footballMatches('matches')">Matches</div>
+      </div>
+    </div>
+    <!-- <select class="ui search selection dropdown" id="search-select" [(ngModel)]="selectedText" (change)="cricketServices()">
+        <option>circket services </option>
+        <option value='matches'>new matches</option>
+        <option value='cricket'>old matches</option>
+        <option value='matchCalendar'>match calendar</option>
+      </select> -->
+    <div class="right menu">
+      <div class="ui fluid category search">
+        <div class="ui icon input">
+          <input class="prompt" type="text" placeholder="Search for a player..." (click)="footballPlayers()" [(ngModel)]="searchText">
+          <i class="search icon"></i>
+        </div>
+        <div class="results"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ===========================football============= -->
+
+<div class="ui very padded container segment" style=" margin-top: 5%;" *ngIf="selectField==''">
+
+  <div class="ui three column divided grid">
+    <div class="row">
+      <div class="column">
+        <p>Team Name</p>
+      </div>
+      <div class="column">
+        <p>Team Logo</p>
+      </div>
+      <div class="column">
+        <p>Team Key</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column">
+        <p>{{footballPlayersData?.team_name}}</p>
+      </div>
+      <div class="column">
+        <div class="image">
+          <img src="{{footballPlayersData?.team_logo}}">
+        </div>
+      </div>
+      <div class="column">
+        <p>{{footballPlayersData?.team_key}}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column">
+        <p>Name</p>
+      </div>
+      <div class="column">
+        <p>Country</p>
+      </div>
+      <div class="column">
+        <p>Role</p>
+      </div>
+    </div>
+    <div class="row" *ngFor="let player of playerData">
+      <div class="column">
+        <p>{{player['player_name']}}</p>
+      </div>
+      <div class="column">
+        <p>{{player['player_country']}}</p>
+      </div>
+      <div class="column">
+        <p>{{player['player_type']}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ui very padded container segment" style=" margin-top: 5%;" *ngIf="searchFootball?.length">
+  <h1>search results</h1>
+  <a class="ui card" href="javascript:void(0)" *ngFor="let obj of searchFootball">
+    <div class="content">
+      <div class="header">{{obj.player_name}}</div>
+      <span class="right floated">
+        <a href="javascript:void(0)">{{obj.player_age}}</a>
+      </span>
+      <div class="meta">
+        <span class="category">{{obj.player_country}}</span>
+      </div>
+      <div class="description">
+        {{obj.player_type}}
+      </div>
+    </div>
+  </a>
+</div>
+
+
+
+<div class="ui very padded container segment" style=" margin-top: 5%;" *ngIf="selectField=='Trophies'">
+
+  <div class="ui four column grid">
+    <h1>In Other Grounds</h1>
+    <div class="row">
+      <div class="column">
+        <p>
+          <strong>Standing Team</strong>
+        </p>
+      </div>
+      <div class="column">
+        <p>
+          <strong>League Season</strong>
+        </p>
+      </div>
+      <div class="column">
+        <p>
+          <strong>Standing PTS</strong>
+        </p>
+      </div>
+      <div class="column">
+        <p>
+          <strong>Standing Place</strong>
+        </p>
+      </div>
+    </div>
+    <div class="row" *ngFor="let data of footDataAway">
+      <div class="column">
+        <p>{{data.standing_team}}</p>
+      </div>
+      <div class="column">
+        <p>{{data.league_season}}</p>
+      </div>
+      <div class="column">
+        <p>{{data.standing_PTS}}</p>
+      </div>
+      <div class="column">
+        <p>{{data.standing_place}}</p>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="ui four column grid">
+    <h1>In Home Grounds</h1>
+    <div class="row">
+      <div class="column">
+        <p>
+          <strong>Standing Team</strong>
+        </p>
+      </div>
+      <div class="column">
+        <p>
+          <strong>League Season</strong>
+        </p>
+      </div>
+      <div class="column">
+        <p>
+          <strong>Standing PTS</strong>
+        </p>
+      </div>
+      <div class="column">
+        <p>
+          <strong>Standing Place</strong>
+        </p>
+      </div>
+    </div>
+    <div class="row" *ngFor="let data of footDataHome">
+      <div class="column">
+        <p>{{data.standing_team}}</p>
+      </div>
+      <div class="column">
+        <p>{{data.league_season}}</p>
+      </div>
+      <div class="column">
+        <p>{{data.standing_PTS}}</p>
+      </div>
+      <div class="column">
+        <p>{{data.standing_place}}</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+<div class="ui very padded container segment" style=" margin-top: 5%;"  *ngIf="selectField=='livescore'">
+    <div class="ui four column grid">
+    <div class="ui link cards">
+      <div class="card" *ngFor="let LiveScore of liveFootData">
+        <div class="content">
+          <div class="header">{{LiveScore?.event_home_team}} vs {{LiveScore?.event_away_team}}</div>
+          <div class="meta">
+            <a>
+              <i class="map marker icon"></i>{{LiveScore?.country_name}}
+              <i class="calendar alternate icon"></i>{{LiveScore?.event_date}}
+              <i class="clock icon"></i>{{LiveScore?.event_time}}</a>
+          </div>
+          <div class="description">
+            <p>Final Result:{{LiveScore?.event_final_result}}</p>
+            <p>League Name:{{LiveScore?.league_name}}</p>
+            <p>League Round:{{LiveScore?.league_round}}</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="ui very padded container segment" style=" margin-top: 5%;" *ngIf="selectField=='matches'">
+    <div class="ui six column divided grid">
+      <div class="row">
+        <div class="column">
+          <strong>League Name</strong>
+        </div>
+        <div class="column">
+          <strong>Home Team</strong>
+        </div>
+        <div class="column">
+          <strong>Away Team</strong>
+        </div>
+        <div class="column">
+          <strong>Venue</strong>
+        </div>
+        <div class="column">
+          <strong>Result</strong>
+        </div>
+        <div class="column">
+          <strong>Goal Keepers</strong>
+        </div>
+      </div>
+      <div class="row" *ngFor="let leaguedata of matchFootData">
+        <div class="column">
+          <p>{{ leaguedata.league_name }}</p>
+        </div>
+        <div class="column">
+          <p>{{ leaguedata.event_home_team }}</p>
+        </div>
+        <div class="column">
+          <p>{{ leaguedata.event_away_team }}</p>
+        </div>
+        <div class="column">
+          <p>{{ leaguedata.country_name }}</p>
+        </div>
+        <div class="column">
+          <p>{{ leaguedata.event_final_result }}</p>
+        </div>
+        <div class="column">
+            <div class="row" *ngFor="let goal of leaguedata.goalscorers">
+          <div class="column">
+          <p>Away scorer:{{ goal.away_scorer }}</p>
+          </div>
+          <div class="column">
+          <p>Home scorer:{{ goal.home_scorer }}</p>
+        </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>

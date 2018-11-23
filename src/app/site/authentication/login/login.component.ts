@@ -14,15 +14,15 @@ export class LoginComponent implements OnInit {
 
   loginUserData = {};
 
-  constructor(private _auth: AuthService, private _router: Router) {}
+  constructor(private _auth: AuthService, private _router: Router) { }
 
   ngOnInit() {
-    const log = localStorage.getItem("token");
-    if (log === "false") {
-      // this._router.navigate(["/login"]);
-    } else {
-      this._router.navigate(["/livescore-info"]);
-    }
+    // const log = localStorage.getItem("token");
+    // if (log === "false") {
+    //   // this._router.navigate(["/login"]);
+    // } else {
+    //   this._router.navigate(["/login"]);
+    // }
   }
 
   loginUser() {
@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
       res => {
         localStorage.setItem("userid", res._id);
         localStorage.setItem("token", res.token);
-        this._router.navigate(["/livescore-info"]);
+        this._router.navigate(["/dashboard"]);
         // redirect to some page
         window.alert("Logged in successfully!");
       },

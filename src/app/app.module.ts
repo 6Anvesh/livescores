@@ -21,6 +21,9 @@ import { AuthGuardService } from "./site/services/auth-guard.service";
 import { PlayerStatsComponent } from './site/components/players-info/player-stats/player-stats.component';
 import { BasketballService } from "./site/services/basketball.service";
 import { NoRouteComponent } from './site/components/no-route/no-route.component';
+import { CircketComponent } from './site/components/circket/circket.component';
+import { FootballComponent } from './site/components/football/football.component';
+import { BasketballComponent } from './site/components/basketball/basketball.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +35,10 @@ import { NoRouteComponent } from './site/components/no-route/no-route.component'
     SignupComponent,
     LoginComponent,
     PlayerStatsComponent,
-    NoRouteComponent
+    NoRouteComponent,
+    CircketComponent,
+    FootballComponent,
+    BasketballComponent
   ],
   imports: [
     BrowserModule,

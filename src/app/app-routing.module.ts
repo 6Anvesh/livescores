@@ -9,6 +9,9 @@ import { MatchesInfoComponent } from "./site/components/matches-info/matches-inf
 import { TrophiesInfoComponent } from "./site/components/trophies-info/trophies-info.component";
 import { PlayerStatsComponent } from "./site/components/players-info/player-stats/player-stats.component";
 import { NoRouteComponent } from "./site/components/no-route/no-route.component";
+import { CircketComponent } from "./site/components/circket/circket.component";
+import { FootballComponent } from "./site/components/football/football.component";
+import { BasketballComponent } from "./site/components/basketball/basketball.component";
 
 export const routes: Routes = [
   {
@@ -29,33 +32,46 @@ export const routes: Routes = [
     component: SignupComponent
   },
   {
-    path: "livescore-info",
-    // canActivate: [AuthGuardService],
-    component: LivescoreInfoComponent
-  },
-  {
-    path: "player-info",
-    component: PlayersInfoComponent
-    // children:[{
-    //   path:"player-info/:id",
-    //   component:PlayerStatsComponent
-    // }
-    // ]
-  },
-  {
-    path: "player-info/:id",
+    path: "circket/:id",
     component: PlayerStatsComponent
   },
   {
-    path: "matches-info",
-    component: MatchesInfoComponent
+    path:'circket',
+    component:CircketComponent
   },
   {
-    path: "trophies-info",
-    component: TrophiesInfoComponent
+    path:'football',
+    component:FootballComponent
+  },
+  {
+    path:'basketball',
+    component:BasketballComponent
   },
   {
     path: "**",
     component: NoRouteComponent
   }
+  // {
+  //   path: "livescore-info",
+  //   // canActivate: [AuthGuardService],
+  //   component: LivescoreInfoComponent
+  // },
+  // {
+  //   path: "player-info",
+  //   component: PlayersInfoComponent
+  //   // children:[{
+  //   //   path:"player-info/:id",
+  //   //   component:PlayerStatsComponent
+  //   // }
+  //   // ]
+  // },
+
+  // {
+  //   path: "matches-info",
+  //   component: MatchesInfoComponent
+  // },
+  // {
+  //   path: "trophies-info",
+  //   component: TrophiesInfoComponent
+  // }
 ];

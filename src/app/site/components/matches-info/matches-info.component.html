@@ -1,23 +1,33 @@
-<div><h1>Please select any sport to view their match details</h1></div>
+<div>
+  <h1>Please select any sport to view their match details</h1>
+</div>
 
 <div>
   <button (click)="footMatches()" class="btn btn-info">Football</button>
   <button (click)="basketMatches()" class="btn btn-info">Basketball</button>
 </div>
 
-<div
-  class="ui very padded container segment"
-  style=" margin-top: 5%;"
-  *ngIf="footBall"
->
+<div class="ui very padded container segment" style=" margin-top: 5%;" *ngIf="footBall">
   <div class="ui six column divided grid">
     <div class="row">
-      <div class="column"><strong>League Name</strong></div>
-      <div class="column"><strong>Home Team</strong></div>
-      <div class="column"><strong>Away Team</strong></div>
-      <div class="column"><strong>Venue</strong></div>
-      <div class="column"><strong>Result</strong></div>
-      <div class="column"><strong>Goal Keepers</strong></div>
+      <div class="column">
+        <strong>League Name</strong>
+      </div>
+      <div class="column">
+        <strong>Home Team</strong>
+      </div>
+      <div class="column">
+        <strong>Away Team</strong>
+      </div>
+      <div class="column">
+        <strong>Venue</strong>
+      </div>
+      <div class="column">
+        <strong>Result</strong>
+      </div>
+      <div class="column">
+        <strong>Goal Keepers</strong>
+      </div>
     </div>
     <div class="row" *ngFor="let leaguedata of footData">
       <div class="column">
@@ -36,10 +46,7 @@
         <p>{{ leaguedata.event_final_result }}</p>
       </div>
 
-      <div
-        class="ui two column divided grid"
-        *ngFor="let goal of leaguedata.goalscorers"
-      >
+      <div class="ui two column divided grid" *ngFor="let goal of leaguedata.goalscorers">
         <p>Away scorer:{{ goal.away_scorer }}</p>
         <p>Home scorer:{{ goal.home_scorer }}</p>
       </div>
@@ -50,18 +57,24 @@
   -------------------------------------BasketBall---------------------------
 -->
 
-<div
-  class="ui very padded container segment"
-  style=" margin-top: 5%;"
-  *ngIf="basketBall"
->
+<div class="ui very padded container segment" style=" margin-top: 5%;" *ngIf="basketBall">
   <div class="ui five column divided grid">
     <div class="row">
-      <div class="column"><strong>League Name</strong></div>
-      <div class="column"><strong>Home Team</strong></div>
-      <div class="column"><strong>Away Team</strong></div>
-      <div class="column"><strong>Venue</strong></div>
-      <div class="column"><strong>Result</strong></div>
+      <div class="column">
+        <strong>League Name</strong>
+      </div>
+      <div class="column">
+        <strong>Home Team</strong>
+      </div>
+      <div class="column">
+        <strong>Away Team</strong>
+      </div>
+      <div class="column">
+        <strong>Venue</strong>
+      </div>
+      <div class="column">
+        <strong>Result</strong>
+      </div>
     </div>
     <div class="row" *ngFor="let leaguedata of basketData">
       <div class="column">

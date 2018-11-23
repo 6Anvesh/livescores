@@ -22,7 +22,7 @@ export class PlayerStatsComponent implements OnInit {
       this.playerStats = response;
       this.playerBatting=response.data.batting;
       this.playerBowling=response.data.bowling;
-      console.log("playwe stats", this.playerBowling,this.playerBatting);
+      console.log("playwe stats", response,this.playerStats ,this.playerBowling,this.playerBatting);
     });
    }
 

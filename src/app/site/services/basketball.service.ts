@@ -31,21 +31,6 @@ export class BasketballService extends ApiService {
       });
   }
 
-  basketLeagues(): Observable<any> {
-    return this._http
-      .get(
-        `https://allsportsapi.com/api/basketball/?met=Leagues&APIkey=${
-          this.apiKey
-        }`
-      )
-      .map(res => {
-        // console.log("Basket Ball leagues are", res);
-        return res.json();
-      })
-      .catch(error => {
-        return new ErrorObservable(error.error);
-      });
-  }
 
   basketMatchDetails(): Observable<any> {
     return this._http
@@ -72,6 +57,22 @@ export class BasketballService extends ApiService {
       )
       .map(res => {
         // console.log("Rankings of teams in league", res);
+        return res.json();
+      })
+      .catch(error => {
+        return new ErrorObservable(error.error);
+      });
+  }
+
+  basketLeagues(): Observable<any> {
+    return this._http
+      .get(
+        `https://allsportsapi.com/api/basketball/?met=Leagues&APIkey=${
+          this.apiKey
+        }`
+      )
+      .map(res => {
+        // console.log("Basket Ball leagues are", res);
         return res.json();
       })
       .catch(error => {

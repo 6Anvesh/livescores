@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 import { CricketService } from "../../services/cricket.service";
 import { Router } from "../../../../../node_modules/@angular/router";
 
-declare const $: any;
+declare var $;
 
 @Component({
   selector: "app-home",
@@ -10,28 +10,33 @@ declare const $: any;
   styleUrls: ["./home.component.css"]
 })
 export class HomeComponent implements OnInit {
-  @Output()
-  playerData = new EventEmitter<any>();
+ 
 
-  public cricketData: any;
-  public matchesData: any;
-  public selectedText: any;
-  circketArr = ["matches", "cricket", "matchCalendar"];
-  playerDetails: any;
 
-  constructor(public CricketService: CricketService, public router: Router) {}
+  constructor(public router: Router) {
 
-  ngOnInit() {}
+  }
 
+  ngOnInit() {
+    $('.ui.dropdown').dropdown();
+  }
+
+  signupClicked() {
+    this.router.navigateByUrl('/signup');
+  }
+  loginClicked() {
+    this.router.navigateByUrl('/login');
+  }
   cricket() {
-    console.log("text", this.selectedText);
-    this.CricketService.cricketapi(this.selectedText).subscribe(response => {
-      this.cricketData = response.data ? response.data : response.matches;
-      console.log("cricket", this.cricketData);
-    });
+    this.router.navigateByUrl('/circket');
   }
 
-  playerInfo() {
-    this.router.navigateByUrl("/player-info");
+  footBall() {
+    this.router.navigateByUrl('/football');
   }
+  basketBall() {
+    this.router.navigateByUrl('/basketball');
+  }
+
+
 }

@@ -21,7 +21,7 @@ export class LivescoreInfoComponent implements OnInit {
 
   footballLiveScore() {
     this.footballService.footLiveScore().subscribe((res: any) => {
-      console.log("Res we got live", res.result);
+      console.log("football live", res.result);
       this.liveData = res.result;
     });
   }
