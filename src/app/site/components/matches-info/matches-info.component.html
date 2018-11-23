@@ -1,2 +1,48 @@
-<h5>{{ footData | json }}</h5>
-<h4>{{ basketData | json }}</h4>
+<!-- <h5>{{ footData | json }}</h5> -->
+<!-- <h4>{{ basketData | json }}</h4> -->
+
+<div class="ui very padded container segment" style=" margin-top: 5%;">
+  <!-- *ngIf="!searchFootball?.length && selectField == 'football'" -->
+  <div class="ui six column divided grid">
+    <div class="row">
+      <div class="column"><p>League Name</p></div>
+      <div class="column"><p>Home Team</p></div>
+      <div class="column"><p>Away Team</p></div>
+      <div class="column"><p>Venue</p></div>
+      <div class="column"><p>Result</p></div>
+      <div class="column"><p>Goal Keepers</p></div>
+    </div>
+    <div class="row" *ngFor="let leaguedata of footData">
+      <div class="column">
+        <p>{{ leaguedata.league_name }}</p>
+      </div>
+      <div class="column">
+        <p>{{ leaguedata.event_home_team }}</p>
+      </div>
+      <div class="column">
+        <p>{{ leaguedata.event_away_team }}</p>
+      </div>
+      <div class="column">
+        <p>{{ leaguedata.country_name }}</p>
+      </div>
+      <div class="column">
+        <p>{{ leaguedata.event_final_result }}</p>
+      </div>
+
+      <div
+        class="ui two column divided grid"
+        *ngFor="let goal of leaguedata.goalscorers"
+      >
+        <
+        <p>Away scorer:{{ goal.away_scorer }}</p>
+        <p>Home scorer:{{ goal.home_scorer }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <p>{{ footData | json }}</p> -->
+
+<div *ngFor="let leaguedata of footData">
+  <p>{{ leaguedata.league_name }}</p>
+</div>

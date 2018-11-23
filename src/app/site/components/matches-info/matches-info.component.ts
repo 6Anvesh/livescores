@@ -17,45 +17,41 @@ export class MatchesInfoComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // this.footMatches();
-    this.basketMatches();
+    this.footMatches();
+    // this.basketMatches();
   }
 
   footMatches() {
     //Leagues
-    this.footballService.footLeagues().subscribe(res => {
-      this.footData = res.json();
-      this.footData = this.footData.result;
-      // console.log("Foot dtaa", this.footData);
-    });
-    //Matches
-    this.footballService.footMatchDetails().subscribe(res => {
-      let data = res.json();
-      data = data.result;
-      // console.log("This", data.result);
-      data.map(ele => {
-        this.footData.push(ele);
-      });
-      console.log("Merged leagues and match data", this.footData);
-    });
-    //only matches
-    // this.footballService.footMatchDetails().subscribe(res => {
-    //   this.footData = res.json();
-    //   this.footData = this.footData.result;
+    // this.footballService.footLeagues().subscribe(res => {
+    //   this.footData = res.result;
+    // this.footData = this.footData.result;
+    // console.log("Foot dtaa", this.footData);
     // });
+    //Matches
+    // this.footballService.footMatchDetails().subscribe(res => {
+    //   let data = res.result;
+    //   data.map(ele => {
+    //     this.footData.push(ele);
+    //   });
+    //   console.log("Merged leagues and match data", this.footData);
+    // });
+    //only matches
+    this.footballService.footMatchDetails().subscribe(res => {
+      this.footData = res.result;
+      console.log("Football Data", this.footData[2]);
+    });
   }
 
   basketMatches() {
     //Leagues
     this.basketService.basketLeagues().subscribe(res => {
-      this.basketData = res.json();
-      this.basketData = this.basketData.result;
+      this.basketData = res.result;
       // console.log("Foot dtaa", this.footData);
     });
     //Matches
     this.basketService.basketMatchDetails().subscribe(res => {
-      let data = res.json();
-      data = data.result;
+      let data = res.result;
       // console.log("This", data.result);
       data.map(ele => {
         this.basketData.push(ele);
