@@ -21,12 +21,12 @@ export class FootballService extends ApiService {
     return this._http
       .get(
         `https://allsportsapi.com/api/football/?met=Livescore&APIkey=${
-          this.apiKey
+        this.apiKey
         }`,
         this.get()
       )
       .map(res => {
-        return res;
+        return res.json();
       })
       .catch(error => {
         return new ErrorObservable(error.error);
@@ -36,13 +36,13 @@ export class FootballService extends ApiService {
     return this._http
       .get(
         `https://allsportsapi.com/api/football/?&met=Players&playerName=${playerName}&APIkey=${
-          this.apiKey
+        this.apiKey
         }`,
         this.get()
       )
       .map(res => {
         // console.log("player details are", res);
-        return res;
+        return res.json();
       })
       .catch(error => {
         return new ErrorObservable(error.error);
@@ -53,12 +53,12 @@ export class FootballService extends ApiService {
     return this._http
       .get(
         `https://allsportsapi.com/api/football/?met=Fixtures&APIkey=${
-          this.apiKey
+        this.apiKey
         }&from=2018-05-23&to=2018-05-23`
       )
       .map(res => {
         // console.log("Matches data is ", res);
-        return res;
+        return res.json();
       })
       .catch(error => {
         return new ErrorObservable(error.error);
@@ -70,12 +70,12 @@ export class FootballService extends ApiService {
     return this._http
       .get(
         `https://allsportsapi.com/api/football/?&met=Standings&leagueId=${leaugeId}&APIkey=${
-          this.apiKey
+        this.apiKey
         }`
       )
       .map(res => {
         // console.log("Rankings of teams in league", res);
-        return res;
+        return res.json();
       })
       .catch(error => {
         return new ErrorObservable(error.error);
@@ -87,12 +87,12 @@ export class FootballService extends ApiService {
     return this._http
       .get(
         `https://allsportsapi.com/api/football/?&met=Topscorers&leagueId=${leagueId}&APIkey=${
-          this.apiKey
+        this.apiKey
         }`
       )
       .map(res => {
         // console.log("Top scorers of teams in league", res);
-        return res;
+        return res.json();
       })
       .catch(error => {
         return new ErrorObservable(error.error);
@@ -104,12 +104,12 @@ export class FootballService extends ApiService {
     return this._http
       .get(
         `https://allsportsapi.com/api/football/?&met=Teams&teamId=${teamId}&APIkey=${
-          this.apiKey
+        this.apiKey
         }`
       )
       .map(res => {
         // console.log("Team Details", res);
-        return res;
+        return res.json();
       })
       .catch(error => {
         return new ErrorObservable(error.error);
@@ -120,12 +120,12 @@ export class FootballService extends ApiService {
     return this._http
       .get(
         `https://newsapi.org/v2/top-headlines?sources=bbc-sport&apiKey=${
-          this.newsApi
+        this.newsApi
         }`
       )
       .map(res => {
         // console.log("bbc News are", res);
-        return res;
+        return res.json();
       })
       .catch(error => {
         return new ErrorObservable(error.error);
@@ -135,12 +135,12 @@ export class FootballService extends ApiService {
     return this._http
       .get(
         `https://newsapi.org/v2/top-headlines?sources=espn&apiKey=${
-          this.newsApi
+        this.newsApi
         }`
       )
       .map(res => {
         // console.log("bbc News are", res);
-        return res;
+        return res.json();
       })
       .catch(error => {
         return new ErrorObservable(error.error);
@@ -151,12 +151,12 @@ export class FootballService extends ApiService {
     return this._http
       .get(
         `https://allsportsapi.com/api/football/?met=Leagues&APIkey=${
-          this.apiKey
+        this.apiKey
         }`
       )
       .map(res => {
         // console.log("Football leagues are", res);
-        return res;
+        return res.json();
       })
       .catch(error => {
         return new ErrorObservable(error.error);

@@ -7,6 +7,7 @@ import { AuthGuardService } from "./site/services/auth-guard.service";
 import { PlayersInfoComponent } from "./site/components/players-info/players-info.component";
 import { MatchesInfoComponent } from "./site/components/matches-info/matches-info.component";
 import { TrophiesInfoComponent } from "./site/components/trophies-info/trophies-info.component";
+import { PlayerStatsComponent } from "./site/components/players-info/player-stats/player-stats.component";
 
 export const routes: Routes = [
   {
@@ -34,6 +35,15 @@ export const routes: Routes = [
   {
     path: "player-info",
     component: PlayersInfoComponent
+    // children:[{
+    //   path:"player-info/:id",
+    //   component:PlayerStatsComponent
+    // }
+    // ]
+  },
+  {
+    path:"player-info/:id",
+    component:PlayerStatsComponent
   },
   {
     path: "matches-info",
@@ -42,5 +52,6 @@ export const routes: Routes = [
   {
     path: "trophies-info",
     component: TrophiesInfoComponent
-  }
+  },
+ 
 ];

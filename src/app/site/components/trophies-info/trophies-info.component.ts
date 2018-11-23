@@ -8,8 +8,10 @@ import { FootballService } from "../../services/football.service";
   styleUrls: ["./trophies-info.component.css"]
 })
 export class TrophiesInfoComponent implements OnInit {
-  public footData: any;
-  public basketData: any;
+  public footDataAway: any;
+  public footDataHome:any;
+  public basketDataAway: any;
+  public basketDataHome: any;
   public cricketData: any;
 
   constructor(
@@ -18,25 +20,23 @@ export class TrophiesInfoComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.footStandings();
-    this.basketStandings();
   }
 
   footStandings() {
     //requires legues id what to do??????(use default)
     this.footballService.footStandings().subscribe(res => {
-      this.footData = res.json();
-      this.footData = this.footData.result;
-      console.log("Football Standings data", this.footData);
+      this.footDataAway = res.result.away;
+      this.footDataHome=res.result.home;
+      console.log("Football Standings data", this.footDataAway,this.footDataHome);
     });
   }
 
   basketStandings() {
     //requires legues id what to do??????(use default)
     this.basketService.basketStandings().subscribe(res => {
-      this.basketData = res.json();
-      this.basketData = this.basketData.result;
-      console.log("Basket Standings data", this.basketData);
+      this.basketDataAway = res.result.away;
+      this.basketDataHome=res.result.home;
+      console.log("Basket Standings data",this.basketDataAway, this.basketDataHome);
     });
   }
 }

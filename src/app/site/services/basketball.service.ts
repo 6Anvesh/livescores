@@ -24,7 +24,7 @@ export class BasketballService extends ApiService {
         this.get()
       )
       .map(res => {
-        return res;
+        return res.json()
       })
       .catch(error => {
         return new ErrorObservable(error.error);
@@ -40,7 +40,7 @@ export class BasketballService extends ApiService {
       )
       .map(res => {
         // console.log("Basket Ball leagues are", res);
-        return res;
+        return res.json();
       })
       .catch(error => {
         return new ErrorObservable(error.error);
@@ -56,7 +56,7 @@ export class BasketballService extends ApiService {
       )
       .map(res => {
         // console.log("Basket Ball Matches are", res);
-        return res;
+        return res.json();
       })
       .catch(error => {
         return new ErrorObservable(error.error);
@@ -72,7 +72,7 @@ export class BasketballService extends ApiService {
       )
       .map(res => {
         // console.log("Rankings of teams in league", res);
-        return res;
+        return res.json();
       })
       .catch(error => {
         return new ErrorObservable(error.error);
@@ -89,7 +89,7 @@ export class BasketballService extends ApiService {
       )
       .map(res => {
         // console.log("Team Details", res);
-        return res;
+        return res.json();
       })
       .catch(error => {
         return new ErrorObservable(error.error);
