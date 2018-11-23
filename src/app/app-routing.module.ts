@@ -8,6 +8,7 @@ import { PlayersInfoComponent } from "./site/components/players-info/players-inf
 import { MatchesInfoComponent } from "./site/components/matches-info/matches-info.component";
 import { TrophiesInfoComponent } from "./site/components/trophies-info/trophies-info.component";
 import { PlayerStatsComponent } from "./site/components/players-info/player-stats/player-stats.component";
+import { NoRouteComponent } from "./site/components/no-route/no-route.component";
 
 export const routes: Routes = [
   {
@@ -42,8 +43,8 @@ export const routes: Routes = [
     // ]
   },
   {
-    path:"player-info/:id",
-    component:PlayerStatsComponent
+    path: "player-info/:id",
+    component: PlayerStatsComponent
   },
   {
     path: "matches-info",
@@ -53,5 +54,8 @@ export const routes: Routes = [
     path: "trophies-info",
     component: TrophiesInfoComponent
   },
- 
+  {
+    path: "**",
+    component: NoRouteComponent
+  }
 ];

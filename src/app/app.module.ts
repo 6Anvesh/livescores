@@ -20,6 +20,7 @@ import { FootballService } from "./site/services/football.service";
 import { AuthGuardService } from "./site/services/auth-guard.service";
 import { PlayerStatsComponent } from './site/components/players-info/player-stats/player-stats.component';
 import { BasketballService } from "./site/services/basketball.service";
+import { NoRouteComponent } from './site/components/no-route/no-route.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +31,8 @@ import { BasketballService } from "./site/services/basketball.service";
     MatchesInfoComponent,
     SignupComponent,
     LoginComponent,
-    PlayerStatsComponent
+    PlayerStatsComponent,
+    NoRouteComponent
   ],
   imports: [
     BrowserModule,
