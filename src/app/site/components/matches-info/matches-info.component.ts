@@ -8,60 +8,39 @@ import { BasketballService } from "../../services/basketball.service";
   styleUrls: ["./matches-info.component.css"]
 })
 export class MatchesInfoComponent implements OnInit {
+  public basketBall: Boolean;
+  public footBall: Boolean;
   public footData: any;
   public basketData: any;
 
   constructor(
     public footballService: FootballService,
     public basketService: BasketballService
-  ) {}
+  ) {
+    this.basketBall = this.footBall = false;
+  }
 
   ngOnInit() {
-    this.footMatches();
+    // this.footMatches();
+    // console.log("ok", this.basketBall, this.footBall);
     // this.basketMatches();
   }
 
   footMatches() {
-    //Leagues
-    // this.footballService.footLeagues().subscribe(res => {
-    //   this.footData = res.result;
-    // this.footData = this.footData.result;
-    // console.log("Foot dtaa", this.footData);
-    // });
-    //Matches
-    // this.footballService.footMatchDetails().subscribe(res => {
-    //   let data = res.result;
-    //   data.map(ele => {
-    //     this.footData.push(ele);
-    //   });
-    //   console.log("Merged leagues and match data", this.footData);
-    // });
-    //only matches
+    this.footBall = true;
+    this.basketBall = false;
     this.footballService.footMatchDetails().subscribe(res => {
       this.footData = res.result;
-      console.log("Football Data", this.footData[2]);
+      console.log("fotData", this.footData[0]);
     });
   }
 
   basketMatches() {
-    //Leagues
-    this.basketService.basketLeagues().subscribe(res => {
-      this.basketData = res.result;
-      // console.log("Foot dtaa", this.footData);
-    });
-    //Matches
+    this.footBall = false;
+    this.basketBall = true;
     this.basketService.basketMatchDetails().subscribe(res => {
-      let data = res.result;
-      // console.log("This", data.result);
-      data.map(ele => {
-        this.basketData.push(ele);
-      });
-      console.log("matches and league data", this.basketData);
+      this.basketData = res.result;
+      console.log("Bot Data", this.basketData);
     });
-    // only matches
-    // this.basketService.basketMatchDetails().subscribe(res => {
-    //   this.basketData = res.json();
-    //   this.basketData = this.basketData.result;
-    // });
   }
 }
