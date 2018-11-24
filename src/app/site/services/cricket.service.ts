@@ -16,9 +16,7 @@ export class CricketService extends ApiService{
   }
 
   cricketapi(selectedText :any): Observable<any>{
-    console.log('api',this.apikey);
     return this.http.get(`https://cricapi.com/api/${selectedText}?apikey=${this.apikey}`,this.get()).map((res)=>{
-      console.log('cricket api',selectedText,res);
       return res.json()
     }).catch((error)=>{
       return new ErrorObservable(error.error);
@@ -31,7 +29,6 @@ return this.playerData;
   
   playerStats(pid :number): Observable<any>{
     return this.http.get(`https://cricapi.com/api/playerStats?apikey=${this.apikey}&pid=${pid}`,this.get()).map((res)=>{
-      console.log('player api',pid,res);
       return res.json()
     }).catch((error)=>{
       return new ErrorObservable(error.error);
@@ -40,7 +37,6 @@ return this.playerData;
 
   playerFinder(name :string): Observable<any>{
     return this.http.get(`https://cricapi.com/api/playerFinder?apikey=${this.apikey}&name=${name}`,this.get()).map((res)=>{
-      console.log('player finder',name,res);
       return res.json()
     }).catch((error)=>{
       return new ErrorObservable(error.error);

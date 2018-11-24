@@ -19,7 +19,7 @@
       <div class="ui fluid category search">
         <div class="ui icon input">
           <input class="prompt" style="width: 200px" type="text" placeholder="Search for a player..." [(ngModel)]="searchText">
-          <input class="prompt" style="width: 70px" (click)="footballPlayers()" type="submit"  value="search"  >
+          <input class="prompt" *ngIf="searchText!=''" style="width: 70px" (click)="footballPlayers()" type="submit"  value="search"  >
         </div>
       </div>
   <a *ngIf="authValue" class="item" (click)="logout()">Logout &nbsp;<i class="sign out alternate icon"></i></a>

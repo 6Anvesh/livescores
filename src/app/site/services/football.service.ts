@@ -41,7 +41,6 @@ export class FootballService extends ApiService {
         this.get()
       )
       .map(res => {
-        // console.log("player details are", res);
         return res.json();
       })
       .catch(error => {
@@ -57,7 +56,6 @@ export class FootballService extends ApiService {
         }&from=2018-05-23&to=2018-05-23`
       )
       .map(res => {
-        // console.log("Matches data is ", res);
         return res.json();
       })
       .catch(error => {
@@ -74,7 +72,6 @@ export class FootballService extends ApiService {
         }`
       )
       .map(res => {
-        // console.log("Rankings of teams in league", res);
         return res.json();
       })
       .catch(error => {
@@ -91,7 +88,6 @@ export class FootballService extends ApiService {
         }`
       )
       .map(res => {
-        // console.log("Top scorers of teams in league", res);
         return res.json();
       })
       .catch(error => {
@@ -108,7 +104,6 @@ export class FootballService extends ApiService {
         }`
       )
       .map(res => {
-        // console.log("Team Details", res);
         return res.json();
       })
       .catch(error => {
@@ -124,7 +119,6 @@ export class FootballService extends ApiService {
         }`
       )
       .map(res => {
-        // console.log("bbc News are", res);
         return res.json();
       })
       .catch(error => {
@@ -139,7 +133,6 @@ export class FootballService extends ApiService {
         }`
       )
       .map(res => {
-        // console.log("bbc News are", res);
         return res.json();
       })
       .catch(error => {
@@ -155,7 +148,6 @@ export class FootballService extends ApiService {
         }`
       )
       .map(res => {
-        // console.log("Football leagues are", res);
         return res.json();
       })
       .catch(error => {

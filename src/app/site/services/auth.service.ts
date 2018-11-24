@@ -18,7 +18,6 @@ export class AuthService extends ApiService {
   }
 
   registerUser(user: any): Observable<any> {
-    console.log("User", user);
     return this.http
       .post(this._registerUrl, user)
       .map((res: any) => {
@@ -30,15 +29,12 @@ export class AuthService extends ApiService {
   }
 
   loginUser(user: any): Observable<any> {
-    // console.log("suer", user);
     return this.http
       .post(this._loginUrl, user)
       .map((res: any) => {
-        console.log(res);
         return res;
       })
       .catch(error => {
-        // console.log("sdsdssdds", error);
         return new ErrorObservable(error.error);
       });
   }
@@ -50,9 +46,6 @@ export class AuthService extends ApiService {
     this._router.navigate(["home"]);
   }
 
-  // getToken() {
-  //   return localStorage.getItem("token");
-  // }
 
   loggedIn() {
     return !!localStorage.getItem("token");

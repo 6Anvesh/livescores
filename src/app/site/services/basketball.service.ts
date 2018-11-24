@@ -40,7 +40,6 @@ export class BasketballService extends ApiService {
         }&from=2018-05-23&to=2018-05-23`
       )
       .map(res => {
-        // console.log("Basket Ball Matches are", res);
         return res.json();
       })
       .catch(error => {
@@ -56,7 +55,6 @@ export class BasketballService extends ApiService {
         }`
       )
       .map(res => {
-        // console.log("Rankings of teams in league", res);
         return res.json();
       })
       .catch(error => {
@@ -72,7 +70,6 @@ export class BasketballService extends ApiService {
         }`
       )
       .map(res => {
-        // console.log("Basket Ball leagues are", res);
         return res.json();
       })
       .catch(error => {
@@ -89,7 +86,6 @@ export class BasketballService extends ApiService {
         }`
       )
       .map(res => {
-        // console.log("Team Details", res);
         return res.json();
       })
       .catch(error => {
