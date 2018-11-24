@@ -1,98 +1,90 @@
 
   <div class="layout" style="position: absolute;background-image: url('/assets/background.jpg');width: 100%; height: 100%; overflow: auto;; background-size: cover;"  >
-  <div class="py-5">
     <div class="row">
-      <div class="col-md-6 mx-auto">
-        <span class="anchor" id="formLogin"></span>
-
-
-<!-- form card login -->
-
-  <div class="card rounded-0">
-  <div class="card-header">
-    <h3 class="mb-0">Register</h3>
-  </div>
-  <div class="card-body">
-    <form class="form" #registerform = "ngForm">
-      <div class="form-group">
-        <label for="username"><strong>Username</strong></label>
-        <input type="text" [(ngModel)]="registerUserData.username" id = "username" name="username" class="form-control" required  minlength = 4 maxlength = 13 #username = "ngModel" >
-      <div *ngIf = "username?.errors && (username?.dirty || username?.touched)" class = "alert alert-danger">
-
-        <div [hidden]= "!username?.errors.required">
-            Username is required
-        </div>
-        <div [hidden]= "!username?.errors.minlength">
-              username must be atleast 4 characters long.
-        </div>
-        <div [hidden]= "!username?.errors.maxlength">
-              username cannot be morethan 13 characters long.
-        </div>
-      </div>
-      </div>
-      <div class="form-group">
-        <label><strong>Email</strong></label>
-        <input type="text" [(ngModel)]="registerUserData.email" id ="email" name="email" class="form-control"  required  maxlength = 32 pattern="[a-zA-Z0-9]+(@)[a-zA-z]+(.)(com|co.in|in|org)" #email = "ngModel">
-        <div *ngIf = "email?.errors && (email?.dirty || email?.touched)" class = "alert alert-danger">
-          <div [hidden]= "!email?.errors.valid">
-            enter valid email
-        </div>
-          <div [hidden]= "!email?.errors.required">
-              must be required
-          </div>
-          <div [hidden]= "!email?.errors.minlength">
-                email must be atleast 5 characters long.
-          </div>
-          <div [hidden]= "!email?.errors.maxlength">
-                email cannot be morethan 32 characters long.
-          </div>
-        </div>
+        <div class="col-md-3"></div>
+          <div class="col-md-6">
+              <div class="card rounded-0" style="margin-top:30px ">
+                  <div class="card-header">
+                    <h3 class="mb-0" style="text-align: center">Register</h3>
+                  </div>
+                  <div class="card-body">
+                    <form class="form" #registerform = "ngForm">
+                      <div class="form-group">
+                        <label for="username"><strong>Username</strong></label>
+                        <input type="text" [(ngModel)]="registerUserData.username" id = "username" name="username" class="form-control" required  minlength = 4 maxlength = 13 #username = "ngModel" >
+                      <div *ngIf = "username?.errors && (username?.dirty || username?.touched)" class = "alert alert-danger">
+                
+                        <div [hidden]= "!username?.errors.required">
+                            Username is required
+                        </div>
+                        <div [hidden]= "!username?.errors.minlength">
+                              username must be atleast 4 characters long.
+                        </div>
+                        <div [hidden]= "!username?.errors.maxlength">
+                              username cannot be morethan 13 characters long.
+                        </div>
+                      </div>
+                      </div>
+                      <div class="form-group">
+                        <label><strong>Email</strong></label>
+                        <input type="text" [(ngModel)]="registerUserData.email" id ="email" name="email" class="form-control"  required  maxlength = 32 pattern="[a-zA-Z0-9]+(@)[a-zA-z]+(.)(com|co.in|in|org)" #email = "ngModel">
+                        <div *ngIf = "email?.errors && (email?.dirty || email?.touched)" class = "alert alert-danger">
+                          <div [hidden]= "!email?.errors.valid">
+                            enter valid email
+                        </div>
+                          <div [hidden]= "!email?.errors.required">
+                              must be required
+                          </div>
+                          <div [hidden]= "!email?.errors.minlength">
+                                email must be atleast 5 characters long.
+                          </div>
+                          <div [hidden]= "!email?.errors.maxlength">
+                                email cannot be morethan 32 characters long.
+                          </div>
+                        </div>
+                    </div>
+                      <div class="form-group">
+                        <label><strong>PhoneNumber</strong></label>
+                        <input type="number" id ="phonenumber" [(ngModel)]="registerUserData.phonenumber" name="phonenumber" class="form-control"  required minlength = 5 maxlength = 10 pattern = "[^0-5][0-9]{9}" #phonenumber = "ngModel">
+                        <div *ngIf = "phonenumber?.errors && (phonenumber?.dirty || phonenumber?.touched)" class = "alert alert-danger">
+                          <div [hidden]= "!phonenumber?.errors.required">
+                             must be required
+                          </div>
+                          <div [hidden]= "!phonenumber?.errors.valid">
+                            enter valid phonenumber
+                         </div>
+                          <div [hidden]= "!phonenumber?.errors.minlength">
+                                phonenumber must be atleast 5 characters long.
+                          </div>
+                          <div [hidden]= "!phonenumber?.errors.maxlength">
+                                phonenumber cannot be morethan 10 characters long.
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label><strong>Password</strong></label>
+                        <input type="password" id ="password" [(ngModel)]="registerUserData.password" name="password" class="form-control"  required minlength = 4  maxlength = 8 #password = "ngModel">
+                        <div *ngIf = "password?.errors && (password?.dirty || password?.touched)" class = "alert alert-danger">
+                          <div [hidden]= "!password?.errors.required">
+                              password is required
+                          </div>
+                          <div [hidden]= "!password?.errors.minlength">
+                                password must be atleast 4 characters long.
+                          </div>
+                          <div [hidden]= "!password?.errors.maxlength">
+                                password cannot be morethan 8 characters long.
+                          </div>
+                        </div>
+                      </div>
+                      <button type="button submit"  [disabled]= "!registerform.valid" (click)="registerUser()" onclick="alert('Registered successfully')" class="btn btn-primary float-right">Register</button>
+                    </form>
+                      <div class="form_p"><p>Already registered ?</p></div>
+                      <a routerLink="/login" style="margin-left:1%;margin-top:-2%">Log in</a>
+                    </div>
+                
+                <!-- /card-block -->
+                </div>
+            </div>
     </div>
-      <div class="form-group">
-        <label><strong>PhoneNumber</strong></label>
-        <input type="number" id ="phonenumber" [(ngModel)]="registerUserData.phonenumber" name="phonenumber" class="form-control"  required minlength = 5 maxlength = 10 pattern = "[^0-5][0-9]{9}" #phonenumber = "ngModel">
-        <div *ngIf = "phonenumber?.errors && (phonenumber?.dirty || phonenumber?.touched)" class = "alert alert-danger">
-          <div [hidden]= "!phonenumber?.errors.required">
-             must be required
-          </div>
-          <div [hidden]= "!phonenumber?.errors.valid">
-            enter valid phonenumber
-         </div>
-          <div [hidden]= "!phonenumber?.errors.minlength">
-                phonenumber must be atleast 5 characters long.
-          </div>
-          <div [hidden]= "!phonenumber?.errors.maxlength">
-                phonenumber cannot be morethan 10 characters long.
-          </div>
-        </div>
-      </div>
-      <div class="form-group">
-        <label><strong>Password</strong></label>
-        <input type="password" id ="password" [(ngModel)]="registerUserData.password" name="password" class="form-control"  required minlength = 4  maxlength = 8 #password = "ngModel">
-        <div *ngIf = "password?.errors && (password?.dirty || password?.touched)" class = "alert alert-danger">
-          <div [hidden]= "!password?.errors.required">
-              password is required
-          </div>
-          <div [hidden]= "!password?.errors.minlength">
-                password must be atleast 4 characters long.
-          </div>
-          <div [hidden]= "!password?.errors.maxlength">
-                password cannot be morethan 8 characters long.
-          </div>
-        </div>
-      </div>
-      <button type="button submit"  [disabled]= "!registerform.valid" (click)="registerUser()" onclick="alert('Registered successfully')" class="btn btn-primary float-right">Register</button>
-    </form>
-      <div class="form_p"><p>Already registered ?</p></div>
-      <a routerLink="/login" style="margin-left:1%;margin-top:-2%">Log in</a>
-    </div>
 
-<!-- /card-block -->
-</div>
-<!-- /form card login -->
-
-</div>
-
-</div>
-</div>
 </div>

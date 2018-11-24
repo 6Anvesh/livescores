@@ -6,16 +6,14 @@ import "rxjs/add/observable/of";
 import "rxjs/add/operator/catch";
 import { ApiService } from "./api.service";
 import { ErrorObservable } from "rxjs/observable/ErrorObservable";
+import { Router } from "../../../../node_modules/@angular/router";
 
 @Injectable()
 export class AuthService extends ApiService {
   private _registerUrl = "http://localhost:3000/api/v1/signup";
   private _loginUrl = "http://localhost:3000/api/v1/login";
-  public user = {
-    name: ""
-  };
-
-  constructor(private http: HttpClient) {
+ 
+  constructor(private http: HttpClient,private _router: Router) {
     super();
   }
 
@@ -24,7 +22,7 @@ export class AuthService extends ApiService {
     return this.http
       .post(this._registerUrl, user)
       .map((res: any) => {
-        return res.json();
+        return res;
       })
       .catch(error => {
         return new ErrorObservable(error.error);
@@ -49,7 +47,7 @@ export class AuthService extends ApiService {
     localStorage.removeItem("token");
     localStorage.removeItem("userid");
     localStorage.removeItem("username");
-    // this._router.navigate(["/home"]);
+    this._router.navigate(["home"]);
   }
 
   // getToken() {

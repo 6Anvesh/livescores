@@ -5,25 +5,25 @@
       </a>
       <a class="item" (click)="cricketClicked()">Cricket </a>
       <a class="item" (click)="footballClicked()">Football </a>
-      <a class="item" (click)="basketballClicked()">Basketball  </a>
-      <div class="ui dropdown">
-        <!-- <input type="hidden" name="gender"> -->
+      <a class="item" style="background-color:rgb(78, 74, 78)"   (click)="basketballClicked()">Basketball  </a>
+      <div class="ui dropdown" style="background-color: rgb(78, 74, 78);width: 220px">
         <i class="dropdown icon"></i>
-        <div class="default text">BasketBall services</div>
+        <div class="default text" style="margin-top: 5px">BasketBall services</div>
         <div class="menu">
-          <div class="item" data-value="Trophies" (click)="basketBallTrophies('Trophies')" >Trophies</div>
-          <div class="item" data-value="livescore" (click)="basketballLiveScore('livescore')">Live Score</div>
-          <div class="item" data-value="matches" (click)="basketballMatches('matches')">matches</div>
+          <div class="item"  style="width: 220px" data-value="Trophies" (click)="basketBallTrophies('Trophies')" >Trophies</div>
+          <div class="item"  style="width: 220px" data-value="livescore" (click)="basketballLiveScore('livescore')">Live Score</div>
+          <div class="item"  style="width: 220px" data-value="matches" (click)="basketballMatches('matches')">matches</div>
         </div>
       </div>
       <div class="right menu">
-        <div class="ui fluid category search">
+        <!-- <div class="ui fluid category search">
           <div class="ui icon input">
             <input class="prompt" type="text" placeholder="Search for a player..."  [(ngModel)]="searchText">
             <i class="search icon" ></i>
           </div>
           <div class="results"></div>
-        </div>
+        </div > -->
+        <a *ngIf="authValue" class="item" (click)="logout()">Logout &nbsp;<i class="sign out alternate icon"></i></a>
       </div>
     </div>
   </div>
@@ -35,8 +35,8 @@
 
 
 <div class="ui very padded container segment" style=" margin-top: 5%;"  *ngIf="selectField=='Trophies'">
-    <div class="ui four column grid" >
-    <h1>In Other Grounds</h1>
+    <div class="ui four column grid" *ngIf="loading">
+    <h1>In Overseas Grounds</h1>
     <div class="row">
         <div class="column">
           <p><strong>Standing Team</strong></p>
@@ -51,7 +51,7 @@
           <p><strong>Standing Place</strong></p>
         </div>
       </div>
-        <div class="row" *ngFor="let data of basketDataAway">
+        <div class="row" *ngFor="let data of basketDataAway | paginate: { itemsPerPage: 6, currentPage: p } ">
             <div class="column">
                 <p>{{data.standing_team}}</p>
             </div>
@@ -65,10 +65,10 @@
                 <p>{{data.standing_place}}</p>
             </div>
         </div>
-    
+        
     </div>
     
-    <div class="ui four column grid" >
+    <div class="ui four column grid" ngIg="loading" >
         <h1>In Home Grounds</h1>
         <div class="row">
             <div class="column">
@@ -84,7 +84,7 @@
               <p><strong>Standing Place</strong></p>
             </div>
           </div>
-            <div class="row" *ngFor="let data of basketDataHome">
+            <div class="row" *ngFor="let data of basketDataHome | paginate: { itemsPerPage: 6, currentPage: p }">
                 <div class="column">
                     <p>{{data.standing_team}}</p>
                 </div>
@@ -92,13 +92,14 @@
                     <p>{{data.league_season}}</p>
                 </div>
                 <div class="column">
-                    <p>{{data.standing_PTS}}</p>
+                    <p>{{data.standing_P}}</p>
                 </div>
                 <div class="column">
                     <p>{{data.standing_place}}</p>
                 </div>
             </div>
-        
+
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
         </div>
 
 
@@ -108,9 +109,10 @@
 
         
 <div class="ui very padded container segment" style=" margin-top: 5%;"  *ngIf="selectField=='livescore'">
-    <div class="ui four column grid">
+    <h1>Basketball Livescore Matches</h1> 
+  <div class="ui four column grid" *ngIf="loading">
     <div class="ui link cards">
-      <div class="card" *ngFor="let LiveScore of liveBasketScore">
+      <div class="card" *ngFor="let LiveScore of liveBasketScore | paginate: { itemsPerPage: 6, currentPage: p }">
         <div class="content">
           <div class="header">{{LiveScore?.event_home_team}} vs {{LiveScore?.event_away_team}}</div>
           <div class="meta">
@@ -127,6 +129,7 @@
         </div>
 
       </div>
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
     </div>
   </div>
 </div>
@@ -135,7 +138,8 @@
 
 
 <div class="ui very padded container segment" style=" margin-top: 5%;"  *ngIf="selectField=='matches'">
-    <div class="ui five column divided grid">
+  <h1>Basketball Matches list</h1>
+    <div class="ui five column divided grid" *ngIf="loading">
       <div class="row">
         <div class="column">
           <strong>League Name</strong>
@@ -153,7 +157,7 @@
           <strong>Result</strong>
         </div>
       </div>
-      <div class="row" *ngFor="let leaguedata of matchesBasketBall">
+      <div class="row" *ngFor="let leaguedata of matchesBasketBall | paginate: { itemsPerPage: 6, currentPage: p }">
         <div class="column">
           <p>{{ leaguedata.league_name }}</p>
         </div>
@@ -171,5 +175,13 @@
           <p>{{ leaguedata.event_final_result }}</p>
         </div>
       </div>
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
     </div>
   </div>
+
+  <div *ngIf="!loading">
+      <div style="margin-left:600px">
+          <i style="font-size: 50px" class="spinner loading icon"></i>
+      </div>
+            
+        </div>

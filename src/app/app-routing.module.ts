@@ -2,16 +2,14 @@ import { Routes } from "@angular/router";
 import { HomeComponent } from "./site/components/home/home.component";
 import { LoginComponent } from "./site/authentication/login/login.component";
 import { SignupComponent } from "./site/authentication/signup/signup.component";
-import { LivescoreInfoComponent } from "./site/components/livescore-info/livescore-info.component";
 import { AuthGuardService } from "./site/services/auth-guard.service";
-import { PlayersInfoComponent } from "./site/components/players-info/players-info.component";
-import { MatchesInfoComponent } from "./site/components/matches-info/matches-info.component";
-import { TrophiesInfoComponent } from "./site/components/trophies-info/trophies-info.component";
-import { PlayerStatsComponent } from "./site/components/players-info/player-stats/player-stats.component";
 import { NoRouteComponent } from "./site/components/no-route/no-route.component";
 import { CircketComponent } from "./site/components/circket/circket.component";
 import { FootballComponent } from "./site/components/football/football.component";
 import { BasketballComponent } from "./site/components/basketball/basketball.component";
+import { DashboardComponent } from "./site/components/dashboard/dashboard.component";
+import { PlayerStatsComponent } from "./site/components/player-stats/player-stats.component";
+
 
 export const routes: Routes = [
   {
@@ -48,9 +46,15 @@ export const routes: Routes = [
     component:BasketballComponent
   },
   {
+    path:'dashboard',
+    component:DashboardComponent,
+    canActivate:[AuthGuardService]
+  },
+  {
     path: "**",
     component: NoRouteComponent
-  }
+  },
+
   // {
   //   path: "livescore-info",
   //   // canActivate: [AuthGuardService],

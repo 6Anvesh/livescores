@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CricketService } from '../../services/cricket.service';
 import { Router } from '../../../../../node_modules/@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 declare var $;
 @Component({
@@ -15,11 +16,20 @@ export class CircketComponent implements OnInit {
  public searchText:any='';
  public selectedText:any='';
  public cricketServicesData:any;
-  constructor(public circketService: CricketService,
-    public router: Router) { }
+ loading:Boolean;
+ p:Number=1;
+  authValue: any;
+  constructor(private circketService: CricketService,
+    private router: Router,
+    private _auth: AuthService
+  ) {
+
+   }
 
   ngOnInit() {
     $('.ui.dropdown').dropdown();
+    this.authValue=this._auth.loggedIn();
+  this.cricketServices('matchCalendar');
   }
 
   circketTeam() {
@@ -28,10 +38,12 @@ export class CircketComponent implements OnInit {
 
 
   cricketPlayerFinder() {     //searching cricket Players
-    console.log("search cricket", this.searchText);
+    this.p=1;
+    this.loading=false
     this.circketService.playerFinder(this.searchText).subscribe(response => {
-      console.log("circket finder", response);
       this.searchData = response.data;
+      this.selectedText=(this.searchData.length)?'':this.selectedText;
+      this.loading=true
     });
   }
   cricketPlayerSelected(pid: any) {
@@ -39,11 +51,12 @@ export class CircketComponent implements OnInit {
   }
 
   cricketServices(ev:any){
+    this.p=1;
     this.selectedText=ev;
-    console.log('text',this.selectedText);
+    this.loading=false
   this.circketService.cricketapi(this.selectedText).subscribe((response)=>{
   this.cricketServicesData=response.data?response.data:response.matches;
-  console.log('cricket',this.cricketServicesData);
+  this.loading=true
   });
     }
 
@@ -62,5 +75,8 @@ export class CircketComponent implements OnInit {
     homeClicked(){
       this.router.navigateByUrl('/home');
     }
+    logout(){
+      this._auth.logoutUser();
+        }
 
 }

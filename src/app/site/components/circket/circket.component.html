@@ -3,27 +3,29 @@
     <a class="item" (click)="homeClicked()">
       <i class="home icon"></i>
     </a>
-    <a class="item" (click)="cricketClicked()">Cricket </a>
+    <a class="item" style="background-color:rgb(78, 74, 78)" (click)="cricketClicked()">Cricket </a>
     <a class="item" (click)="footballClicked()">Football </a>
     <a class="item" (click)="basketballClicked()">Basketball  </a>
-    <div class="ui dropdown">
-      <!-- <input type="hidden" name="gender"> -->
+    <div class="ui dropdown" style="background-color: rgb(78, 74, 78);width: 220px">
       <i class="dropdown icon"></i>
-      <div class="default text">Cricket Services</div>
-      <div class="menu">
-        <div class="item" data-value="matches" (click)="cricketServices('matches')">new matches</div>
-        <div class="item" data-value="cricket" (click)="cricketServices('cricket')">old matches</div>
-        <div class="item" data-value="matchCalendar" (click)="cricketServices('matchCalendar')">match calendar</div>
+      <div class="default text" style="margin-top: 5px">Cricket Services</div>
+      <div class="menu" >
+        <div class="item" style="width: 220px" data-value="matches" (click)="cricketServices('matches')">new matches</div>
+        <div class="item" style="width: 220px" data-value="cricket" (click)="cricketServices('cricket')">old matches</div>
+        <div class="item" style="width: 220px" data-value="matchCalendar" (click)="cricketServices('matchCalendar')">match calendar</div>
       </div>
     </div>
     <div class="right menu">
       <div class="ui fluid category search">
         <div class="ui icon input">
-          <input class="prompt" type="text" placeholder="Search for a player..." (click)="cricketPlayerFinder()" [(ngModel)]="searchText">
-          <i class="search icon" ></i>
+          <input class="prompt" style="width: 200px"type="text" placeholder="Search for a player..."  [(ngModel)]="searchText">
+            <input class="prompt" style="width: 70px" (click)="cricketPlayerFinder()" type="submit" value="search"  >
+            
+          <!-- </div> -->
         </div>
-        <div class="results"></div>
+        
       </div>
+      <a *ngIf="authValue" class="item" (click)="logout()">Logout &nbsp;<i class="sign out alternate icon"></i></a>
     </div>
   </div>
 </div>
@@ -31,8 +33,9 @@
 <!-- matches -->
 
 <div class="ui very padded container segment" style=" margin-top: 5%;" *ngIf="selectedText=='matches'">
-<div class="ui items">
-  <div class="item"  *ngFor="let obj of cricketServicesData">
+    <h1>New Matches List</h1>
+<div class="ui items" *ngIf="loading">
+  <div class="item"  *ngFor="let obj of cricketServicesData  | paginate: { itemsPerPage: 6, currentPage: p }">
     <div class="content">
       <a class="header">{{obj['team-1']}} vs {{obj['team-2']}}</a>
       <div class="description" *ngIf="obj['matchStarted']">
@@ -53,14 +56,16 @@
         </div>
     </div>
   </div>
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
 </div>
 </div>
 
 
 <!-- old matches -->
 <div class="ui very padded container segment" style=" margin-top: 5%;" *ngIf="selectedText=='cricket'">
-<div class="ui items" >
-    <div class="item"  *ngFor="let obj of cricketServicesData">
+    <h1>Old Matches List</h1>
+<div class="ui items" *ngIf="loading" >
+    <div class="item"  *ngFor="let obj of cricketServicesData | paginate: { itemsPerPage: 6, currentPage: p }">
       <div class="content">
         <a class="header">{{obj['title']}}</a>
         <div class="description">
@@ -68,6 +73,7 @@
         </div>
       </div>
     </div>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
   </div>
 </div>
 
@@ -75,9 +81,10 @@
 
 <!-- match calendar -->
 <div class="ui very padded container segment" style=" margin-top: 5%;" *ngIf="selectedText=='matchCalendar'">
-  <div class="card">
-    <div class="ui items">
-      <div class="item" *ngFor="let obj of cricketServicesData">
+    <h1>Matches List</h1>
+  <div class="card" *ngIf="loading">
+    <div class="ui items" >
+      <div class="item" *ngFor="let obj of cricketServicesData | paginate: { itemsPerPage: 6, currentPage: p }">
         <div class="content">
           <a class="header">{{obj['name']}}</a>
           <div class="description">
@@ -86,14 +93,17 @@
           </div>
         </div>
       </div>
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
     </div>
   </div>
 </div>
 
 
 <!-- ========================cricket=================== -->
-<div class="ui very padded container segment" style=" margin-top: 5%;" *ngIf="searchData?.length">
-<a class="ui card" href="javascript:void(0)" *ngFor="let obj of searchData" (click)="cricketPlayerSelected(obj['pid'])">
+<div class="ui very padded container segment" style=" margin-top: 5%;" *ngIf="selectedText==''&&searchData?.length" >
+    <h1>Search Results</h1>
+  <div *ngIf="loading">
+<a class="ui card" href="javascript:void(0)" *ngFor="let obj of searchData | paginate: { itemsPerPage: 6, currentPage: p }" (click)="cricketPlayerSelected(obj['pid'])">
   <div class="content">
     <div class="header">{{obj['fullName']}}</div>
     <div class="meta">
@@ -102,4 +112,11 @@
   </div>
 </a>
 </div>
+<pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>
 
+<div *ngIf="!loading">
+    <div style="margin-left:600px">
+        <i style="font-size: 50px" class="spinner loading icon"></i>
+    </div>
+</div>

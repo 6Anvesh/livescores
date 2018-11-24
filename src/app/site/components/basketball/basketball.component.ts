@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '../../../../../node_modules/@angular/router';
 import { BasketballService } from '../../services/basketball.service';
+import { AuthService } from '../../services/auth.service';
 
 declare var $;
 @Component({
@@ -15,16 +16,21 @@ export class BasketballComponent implements OnInit {
   liveBasketScore: any;
   matchesBasketBall: any;
   leagueBasketBall: any;
+  p:Number=1;
+  authValue: any;
+  loading:Boolean;
 
   constructor(
     private router: Router,
     private basketballService:BasketballService,
+    private _auth: AuthService
   ) { 
-    // this.basketballTeam();
+    this.basketballLiveScore('livescore');
   }
 
   ngOnInit() {
     $('.ui.dropdown').dropdown();
+    this.authValue=this._auth.loggedIn();
   }
 
   cricketClicked(){
@@ -41,39 +47,41 @@ export class BasketballComponent implements OnInit {
 
 
   basketBallTrophies(ev:any) {
+    this.loading=false;
     this.selectField=ev;
-    //requires legues id what to do??????(use default)
+    this.p=1;
     this.basketballService.basketStandings().subscribe(res => {
       this.basketDataAway = res.result.away;
       this.basketDataHome=res.result.home;
-      console.log("Basket Standings data",this.basketDataAway, this.basketDataHome);
+      this.loading=true;
     });
   }
   basketballLiveScore(ev:any) {
+    this.loading=false;
 this.selectField=ev;
+this.p=1;
     this.basketballService.basketLiveScore().subscribe(res => {
       this.liveBasketScore=res.result;
-      console.log("live score of basketball", res);
+      this.loading=true;
     });
   }
 
   basketballMatches(ev:any){
+    this.loading=false;
     this.selectField=ev;
+    this.p=1;
     this.basketballService.basketMatchDetails().subscribe(res => {
       this.matchesBasketBall = res.result;
-      console.log("Bot Data", this.matchesBasketBall);
+      this.loading=true;
     });
   }
 
-basketballTeam(){
-  this.basketballService.basketLeagues().subscribe(res => {
-    this.leagueBasketBall = res.result;
-    console.log("Bot Data", res,this.matchesBasketBall);
-  });
-}
+
 
 homeClicked(){
   this.router.navigateByUrl('/home');
 }
-
+logout(){
+  this._auth.logoutUser();
+    }
 }

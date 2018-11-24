@@ -17,12 +17,12 @@ export class LoginComponent implements OnInit {
   constructor(private _auth: AuthService, private _router: Router) { }
 
   ngOnInit() {
-    // const log = localStorage.getItem("token");
-    // if (log === "false") {
-    //   // this._router.navigate(["/login"]);
-    // } else {
-    //   this._router.navigate(["/login"]);
-    // }
+    const log = localStorage.getItem("token");
+    if (log === "false") {
+      this._router.navigate(["/signup"]);
+    } else {
+      this._router.navigate(["/dashboard"]);
+    }
   }
 
   loginUser() {
@@ -30,9 +30,8 @@ export class LoginComponent implements OnInit {
       res => {
         localStorage.setItem("userid", res._id);
         localStorage.setItem("token", res.token);
-        this._router.navigate(["/dashboard"]);
-        // redirect to some page
         window.alert("Logged in successfully!");
+        this._router.navigate(["/dashboard"]);
       },
       err => {
         window.alert("Please check email/password");

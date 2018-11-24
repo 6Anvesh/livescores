@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 import { CricketService } from "../../services/cricket.service";
 import { Router } from "../../../../../node_modules/@angular/router";
 import { FootballService } from "../../services/football.service";
+import { AuthService } from "../../services/auth.service";
 
 declare var $;
 
@@ -12,16 +13,19 @@ declare var $;
 })
 export class HomeComponent implements OnInit {
   newsData: any=[];
- 
+  p: Number=1;
+  authValue: any;
 
 
-  constructor(public router: Router,private footBallServices:FootballService) {
+  constructor(public router: Router,private footBallServices:FootballService,
+  private _auth: AuthService) {
 this.newsapi();
 this.espnNews();
   }
 
   ngOnInit() {
     $('.ui.dropdown').dropdown();
+    this.authValue=this._auth.loggedIn();
   
   }
 
@@ -44,19 +48,19 @@ this.espnNews();
 
   newsapi(){
 this.footBallServices.bbcNews().subscribe(response => {
-  this.newsData.push(response.articles[0]);
-  this.newsData.push(response.articles[1]);
-  this.newsData.push(response.articles[2]);
-  console.log('bbc',this.newsData);
+
+  this.newsData.push(...response.articles);
 });
   }
   espnNews(){
     this.footBallServices.espnNews().subscribe(response => {
-  this.newsData.push(response.articles[0]);
-  this.newsData.push(response.articles[1]);
-  this.newsData.push(response.articles[2]);
-  console.log('espn',this.newsData);
+  this.newsData.push(...response.articles);
     });
+      }
+
+      logout(){
+        this.authValue=false;
+        this._auth.logoutUser();
       }
   }
 

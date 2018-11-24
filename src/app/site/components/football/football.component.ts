@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FootballService } from '../../services/football.service';
 import { Router } from '../../../../../node_modules/@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 declare var $;
 @Component({
@@ -11,7 +12,7 @@ declare var $;
 
 export class FootballComponent implements OnInit {
   searchText: string;
-  selectField: string='';
+  selectField: string='team';
   footballPlayersData: any;
   playerData: any;
   searchFootball: any;
@@ -19,60 +20,72 @@ export class FootballComponent implements OnInit {
   footDataHome: any;
   liveFootData: any;
   matchFootData: any;
+  p:Number=1;
+  authValue: any;
+  loading:Boolean;
 
   constructor(
     private footballService: FootballService,
-    public router: Router
+    public router: Router,public _auth:AuthService
   ) {
     this.footballPlayersInfo();
    }
 
   ngOnInit() {
     $('.ui.dropdown').dropdown();
+    this.authValue=this._auth.loggedIn();
   }
 
   footballPlayersInfo(){   //football players
+    this.loading=false;
 this.footballService.footTeams().subscribe((res: any) => {
   this.footballPlayersData = res.result[0];
   this.playerData=res.result[0].players;
-  console.log('footballPlayersData',this.footballPlayersData,this.playerData);
+  this.loading=true
 });
   }
 
   footballPlayers() {   //searching football Players
-    console.log("football",this.selectField, this.searchText);
+    this.loading=false;
+    this.p=1;
     this.footballService.footPlayersDetails(this.searchText).subscribe((res: any) => {
-        console.log('res foot',res);
         this.searchFootball = res.result;
-        console.log("this", this.searchFootball);
+        this.selectField=(this.searchFootball.length)?'':this.selectField;
+        this.loading=true
       });
   }
 
   footballTrophies(ev:any) {
-    //requires legues id what to do??????(use default)
     this.selectField=ev;
+    this.loading=false;
+    this.p=1;
     this.footballService.footStandings().subscribe(res => {
       this.footDataAway = res.result.away;
       this.footDataHome=res.result.home;
-      console.log("Football Standings data", this.footDataAway,this.footDataHome);
+      this.loading=true
     });
   }
+
+
 
   footballLiveScore(ev:any){
     this.selectField=ev;
+    this.p=1;
+    this.loading=false;
     this.footballService.footLiveScore().subscribe((res: any) => {
-      console.log("football live", res.result);
       this.liveFootData = res.result;
+      this.loading=true
     });
-
   }
-
+  
   footballMatches(ev:any){
+    this.loading=false
     this.selectField=ev;
+    this.p=1;
     this.footballService.footMatchDetails().subscribe(res => {
       this.matchFootData = res.result;
-      console.log("fotData", this.matchFootData[0]);
-    });
+      this.loading=true
+    }); 
   }
 
   cricketClicked(){
@@ -90,4 +103,9 @@ this.footballService.footTeams().subscribe((res: any) => {
   homeClicked(){
     this.router.navigateByUrl('/home');
   }
+
+  logout(){
+    this._auth.logoutUser();
+      }
+    
 }

@@ -4,17 +4,21 @@
     <a class="item" (click)="cricket()">cricket</a>
     <a class="item" (click)="footBall()">Football</a>
     <a class="item" (click)="basketBall()">BasketBall</a>
-    <div class="right menu">
+    <div class="right menu" *ngIf="!authValue">
         <a class="item" (click)="signupClicked()">Signup</a>
         <a class="item" (click)="loginClicked()">Login</a>
+    </div>
+    <div class="right menu" *ngIf="authValue">
+        <a class="item" (click)="logout()">Logout &nbsp;<i class="sign out alternate icon"></i></a>
     </div>
   </div>
 </div>
 
 <div class="ui very padded container segment" style=" margin-top: 5%;">
+  <h1>SPORTS NEWS</h1>
     <div class="ui three column divided grid">
-  <div class="ui link cards">
-    <a class="card" *ngFor="let data of newsData"  href={{data?.url}} target="_blank" >
+  <div class="ui link cards" *ngIf='newsData.length'>
+    <a class="card" *ngFor="let data of newsData | paginate: { itemsPerPage: 6, currentPage: p }"  href={{data?.url}} target="_blank" >
       <div class="image">
         <img src={{data?.urlToImage}}>
       </div>
@@ -33,7 +37,14 @@
         </span>
       </div>
     </a>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
   </div>
 </div>
+
+</div>
+<div *ngIf="!newsData.length">
+    <div style="margin-left:600px">
+        <i style="font-size: 50px" class="spinner loading icon"></i>
+    </div>
 </div>
 
