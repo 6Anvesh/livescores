@@ -11,3 +11,29 @@
   </div>
 </div>
 
+<div class="ui very padded container segment" style=" margin-top: 5%;">
+    <div class="ui three column divided grid">
+  <div class="ui link cards">
+    <a class="card" *ngFor="let data of newsData"  href={{data?.url}} target="_blank" >
+      <div class="image">
+        <img src={{data?.urlToImage}}>
+      </div>
+      <div class="content">
+        <div class="header">{{data?.title}}</div>
+        <div class="description">
+          {{data?.description}}
+        </div>
+      </div>
+      <div class="extra content">
+        <span class="right floated">
+          {{data?.publishedAt}}
+        </span>
+        <span>
+          {{data?.author}}
+        </span>
+      </div>
+    </a>
+  </div>
+</div>
+</div>
+
