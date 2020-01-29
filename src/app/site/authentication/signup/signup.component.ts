@@ -8,6 +8,7 @@ import { AuthService } from "../../services/auth.service";
 })
 export class SignupComponent implements OnInit,AfterViewInit {
   registerUserData = {};
+  usernameExists:Boolean=false;
   constructor(private _auth: AuthService, private _router: Router) {}
 
   ngOnInit() {
@@ -20,6 +21,20 @@ this._router.navigate(['signup'])
     } else {
       this._router.navigate(["/dashboard"]);
     }
+  }
+
+  uniqueUserName(username:string){
+    this.usernameExists=false;
+    this._auth.uniqueUserName(username).subscribe(
+      res => {
+        if(res.success){
+          this.usernameExists=true;
+        }
+        console.log("Res", res);
+        // this._router.navigate(['/login'])
+      },
+      err => console.log(err)
+    );
   }
   
 

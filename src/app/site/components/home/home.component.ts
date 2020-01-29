@@ -19,8 +19,8 @@ export class HomeComponent implements OnInit {
 
   constructor(public router: Router,private footBallServices:FootballService,
   private _auth: AuthService) {
-this.newsapi();
-this.espnNews();
+// this.newsapi();
+// this.espnNews();
   }
 
   ngOnInit() {

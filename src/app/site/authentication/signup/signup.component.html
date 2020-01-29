@@ -11,9 +11,11 @@
                     <form class="form" #registerform = "ngForm">
                       <div class="form-group">
                         <label for="username"><strong>Username</strong></label>
-                        <input type="text" [(ngModel)]="registerUserData.username" id = "username" name="username" class="form-control" required  minlength = 4 maxlength = 13 #username = "ngModel" >
-                      <div *ngIf = "username?.errors && (username?.dirty || username?.touched)" class = "alert alert-danger">
-                
+                        <input type="text" (focusout)="uniqueUserName(registerUserData.username)" [(ngModel)]="registerUserData.username" id = "username" name="username" class="form-control" required  minlength = 4 maxlength = 13 #username = "ngModel" >
+                      <div *ngIf = "usernameExists|| (username?.errors && (username?.dirty || username?.touched))" class = "alert alert-danger">
+                        <div [hidden]= "!usernameExists">
+                         This Username Already exists.please choose anotherone.
+                      </div>
                         <div [hidden]= "!username?.errors.required">
                             Username is required
                         </div>
@@ -76,7 +78,7 @@
                           </div>
                         </div>
                       </div>
-                      <button type="button submit"  [disabled]= "!registerform.valid" (click)="registerUser()" onclick="alert('Registered successfully')" class="btn btn-primary float-right">Register</button>
+                      <button type="button submit"  [disabled]= "(usernameExists||!registerform.valid)" (click)="registerUser()" onclick="alert('Registered successfully')" class="btn btn-primary float-right">Register</button>
                     </form>
                       <div class="form_p"><p>Already registered ?</p></div>
                       <a routerLink="/login" style="margin-left:1%;margin-top:-2%">Log in</a>

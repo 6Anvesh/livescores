@@ -1,9 +1,9 @@
 <div class="ui grid">
   <div class="ui blue inverted fixed menu navbar page grid">
     <a class="item">SHUTTLE<i class="home icon"></i> </a>
-    <a class="item" (click)="cricket()">cricket</a>
-    <a class="item" (click)="footBall()">Football</a>
-    <a class="item" (click)="basketBall()">BasketBall</a>
+    <!-- <a class="item" (click)="cricket()">cricket</a> -->
+    <!-- <a class="item" (click)="footBall()">Football</a> -->
+    <!-- <a class="item" (click)="basketBall()">BasketBall</a> -->
     <div class="right menu" *ngIf="!authValue">
         <a class="item" (click)="signupClicked()">Signup</a>
         <a class="item" (click)="loginClicked()">Login</a>
@@ -17,7 +17,7 @@
 <div class="ui very padded container segment" style=" margin-top: 5%;">
   <h1>SPORTS NEWS</h1>
     <div class="ui three column divided grid">
-  <div class="ui link cards" *ngIf='newsData.length'>
+  <!-- <div class="ui link cards" *ngIf='newsData.length'>
     <a class="card" *ngFor="let data of newsData | paginate: { itemsPerPage: 6, currentPage: p }"  href={{data?.url}} target="_blank" >
       <div class="image">
         <img src={{data?.urlToImage}}>
@@ -38,7 +38,7 @@
       </div>
     </a>
     <pagination-controls (pageChange)="p = $event"></pagination-controls>
-  </div>
+  </div> -->
 </div>
 
 </div>

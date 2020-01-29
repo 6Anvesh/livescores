@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
 import { AuthService } from "./../../services/auth.service";
 import { NgForm } from "@angular/forms";
+import { UserService } from "../../services/user.service";
 
 @Component({
   selector: "app-login",
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
 
   loginUserData = {};
 
-  constructor(private _auth: AuthService, private _router: Router) { }
+  constructor(private _auth: AuthService,private _userService:UserService ,private _router: Router) { }
 
   ngOnInit() {
     const log = localStorage.getItem("token");
@@ -28,6 +29,7 @@ export class LoginComponent implements OnInit {
   loginUser() {
     this._auth.loginUser(this.loginUserData).subscribe(
       res => {
+        this._userService.userData=res.username;
         localStorage.setItem("userid", res._id);
         localStorage.setItem("token", res.token);
         window.alert("Logged in successfully!");

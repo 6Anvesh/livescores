@@ -22,6 +22,7 @@ import { BasketballComponent } from './site/components/basketball/basketball.com
 import { NgxPaginationModule } from 'ngx-pagination';
 import { DashboardComponent } from "./site/components/dashboard/dashboard.component";
 import { PlayerStatsComponent } from "./site/components/player-stats/player-stats.component";
+import { UserService } from "./site/services/user.service";
 
 @NgModule({
   declarations: [
@@ -45,7 +46,7 @@ import { PlayerStatsComponent } from "./site/components/player-stats/player-stat
     NgxPaginationModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [CricketService,BasketballService , AuthService, FootballService, AuthGuardService],
+  providers: [CricketService,BasketballService , AuthService, FootballService, AuthGuardService,UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
